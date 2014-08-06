@@ -1,0 +1,22 @@
+<h1> All Place </h1>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Longitute</th>
+			<th>Latitude</th>
+</tr>
+<tr>	
+<% @places.each do |place| %>
+	<tr>
+		<td><%=place.name %></td>
+		<td><%=place.longitute %></td>
+		<td><%=place.latitude %></td>
+		<td><%= link_to 'Edit', edit_place_path(place) %></td>
+		<td><%= link_to 'Delete',
+			delete_place_path(place), method: 'delete' %> </td>
+	</tr>
+	<% end %>
+</table>
+<br>
+<br>
+<%= link_to 'New Post' , new_place_path %> 

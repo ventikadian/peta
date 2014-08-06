@@ -1,0 +1,18 @@
+<h1> Edit Place </h1>
+<% if !@place.errors.empty? %>
+	<% @place.errors.full_messages.each do |msg| %>
+		<h4 style="color:red;"><%= msg %></h4>
+		<% end %> 
+	<% end %>
+<%= form_for @place do |f| %>
+	<%= f.label :name %> :
+	<%= f.text_field :name %>
+	<br/>
+	<%= f.label :longitute %> : 
+	<%= f.text_field :longitute %>
+	</br>
+	<%= f.label :latitude %> : 
+	<%= f.text_field :latitude %>
+	<br/>
+<%= f.submit %>
+<% end %>
