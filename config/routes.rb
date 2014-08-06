@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :users
+
   resources :places
   #get 'places/new', to: "places#new"
   #get 'places/:id/edit' to:'places#edit', as: 'edit_place'
