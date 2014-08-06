@@ -1,4 +1,7 @@
 class PlacesController < ApplicationController
+	http_basic_authenticate_with name: "ventika", password: "rahasia",
+	except: [:index, :show]
+
 	def new
 		@place = Place.new
 	end
@@ -39,10 +42,14 @@ class PlacesController < ApplicationController
 		#render json:params
 		@place = Place.new(params.require(:place)
 			.permit(:name, :longitute, :latitude))
+		respond_to do |format|
 		if @place.save
-			redirect_to new_place_path, notice: "Succesfully save the post!"
+			format.html {redirect_to new_place_path, notice: "Succesfully save the post!"}
+			format.json {render json: @place}
 		else
-			render :new
+			format.html {render :new}
+			format.json {render json: @place.errors}
 		end
 	end
+end
 end
