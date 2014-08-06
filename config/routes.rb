@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  resources :users
-
-  resources :places
+  resources :places #except: [:index, :show]
   #get 'places/new', to: "places#new"
   #get 'places/:id/edit' to:'places#edit', as: 'edit_place'
   #patch 'places/:id', to:'places#update' as: 'place'
@@ -10,6 +8,8 @@ Rails.application.routes.draw do
   delete 'places/:id', to:"places#destroy", as: 'delete_place'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
+  resources :sessions
+  resources :users
 
   # You can have the root of your site routed with "root"
   # root 'places#index'

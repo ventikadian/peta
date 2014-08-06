@@ -1,4 +1,5 @@
 class PlacesController < ApplicationController
+	before_action :authorize, except: [:index, :show]
 	def new
 		@place = Place.new
 	end

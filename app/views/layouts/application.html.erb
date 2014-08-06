@@ -23,17 +23,34 @@
   <section class="top-bar-section">
     <!-- Right Nav Section -->
     <ul class="right">
-      <li class="active"><a href="#">Hello Guest</a></li>
+      <li class="active"><a href="#">Hello, <%=current_user ? current_user.email : 'Guest' %></a></li>
         </ul>
       </li>
     </ul>
 
     <!-- Left Nav Section -->
     <ul class="left">
-      <li><a href="#">Sign Up</a></li>
+      <% if current_user %>
+        <li><%= link_to "Log Out", session_path(current_user), method: 'delete' %> </li>
+      <% else %>
+      <li><%= link_to "Log In", new_session_path %> </li>
+      <li><%= link_to "Sign Up", new_user_path %> </li>
+      <% end %> 
     </ul>
   </section>
 </nav>
+<% if notice %>
+  <div data-alert class="alert-box alert radius">
+  T<%= notice %>
+  <a href="#" class="close">&times;</a>
+</div>
+  <% end %>
+  <% if alert %>
+  <div data-alert class="alert-box success radius">
+  <%= alert %>
+  <a href="#" class="close">&times;</a>
+</div>
+<% end %>
 
     <%= yield %>
     <%= javascript_include_tag "application" %>
