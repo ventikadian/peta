@@ -9,10 +9,6 @@ class PlacesController < ApplicationController
 		render json: post
 	end
 
-	def edit
-		@place = Place.find(params[:id])
-  	end
-
   	def update
   		#minta objeknya ke model
   		@place = Place.find(params[:id])
@@ -40,10 +36,18 @@ class PlacesController < ApplicationController
 		#render json:params
 		@place = Place.new(params.require(:place)
 			.permit(:name, :longitute, :latitude))
-		if @place.save
-			redirect_to new_place_path, notice: "Succesfully save the post!"
-		else
-			render :new
+		respond_to do |format|
+			if @place.save
+				format.html {redirect_to places_path, notice: "Succesfully save the place"}
+				format.json {render json:@place}
+			else
+				format.html {render :new}
+				format.json {render json:@place.errors}
+			end
 		end
 	end
+
+	def edit
+		@place = Place.find(params[:id])
+  	end
 end

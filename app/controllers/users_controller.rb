@@ -9,6 +9,8 @@ class UsersController < ApplicationController
 
 		respond_to do |format|
 		if @user.save
+			#@user.update(auth_token: "kkkk")
+			session[:user_id] = @user.id
 			format.html {redirect_to new_user_path, notice: "Succesfully"}
 			format.json {render json: @user}
 			#redirect_to new_user_path
